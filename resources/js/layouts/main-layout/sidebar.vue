@@ -1,14 +1,23 @@
 <script setup>
+import {computed} from "vue";
+import {Link, usePage} from "@inertiajs/vue3";
 
-import {Link} from "@inertiajs/vue3";
+const page = usePage();
+
+const user = computed(() => page.props.auth.user);
+
 </script>
 
 <template>
+
     <aside class="hidden w-64 shrink-0 flex-col bg-slate-900 text-slate-300 transition-all duration-300 md:flex">
-        <!-- Логотип -->
+
         <div class="flex items-center gap-3 px-6 py-5">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-500 text-white shadow-sm">
-                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6H6a2 2 0 00-2 2zm14 16H6V4h8v4h4v12z" /></svg>
+            <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-500 text-white shadow-sm">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 4v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6H6a2 2 0 00-2 2zm14 16H6V4h8v4h4v12z"/>
+                </svg>
             </div>
             <div class="flex flex-col">
                 <span class="text-sm leading-tight font-bold text-white">Бібліотечна система</span>
@@ -16,9 +25,16 @@ import {Link} from "@inertiajs/vue3";
             </div>
         </div>
 
-        <!-- Навигация -->
+
         <nav class="custom-scrollbar flex-1 space-y-1 overflow-y-auto px-4 py-4">
-            <Link :href="route('dashboard')" class="flex items-center gap-3 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-medium text-white transition-colors">
+            <Link
+                :href="route('dashboard')"
+                :class="route().current('dashboard')
+                ? 'bg-blue-600 px-3 py-2.5 text-white'
+                : 'hover:bg-slate-800 hover:text-white'"
+                class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
+            >
+
                 <svg class="h-5 w-5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                         stroke-linecap="round"
@@ -29,13 +45,16 @@ import {Link} from "@inertiajs/vue3";
                 </svg>
                 Головна
             </Link>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
+            <a href="#"
+               class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
                 <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                 </svg>
                 Читачі
             </a>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
+            <a href="#"
+               class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
                 <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                         stroke-linecap="round"
@@ -46,7 +65,8 @@ import {Link} from "@inertiajs/vue3";
                 </svg>
                 Реєстрації
             </a>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
+            <a href="#"
+               class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
                 <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                         stroke-linecap="round"
@@ -57,7 +77,16 @@ import {Link} from "@inertiajs/vue3";
                 </svg>
                 Співробітники
             </a>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
+            <Link
+                v-if="user.data.is_admin"
+                :href="route('workplaces.index')"
+                :class="[
+                            'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                            route().current('workplaces.*')
+                                ? 'bg-blue-600 text-white'
+                                : 'hover:bg-slate-800 hover:text-white'
+                        ]"
+            >
                 <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                         stroke-linecap="round"
@@ -67,11 +96,12 @@ import {Link} from "@inertiajs/vue3";
                     />
                 </svg>
                 Робочі місця
-            </a>
+            </Link>
 
             <div class="mt-6 mb-2 px-3 text-xs font-semibold tracking-wider text-slate-500 uppercase">Система</div>
 
-            <a href="#" class="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
+            <a href="#"
+               class="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
                 <div class="flex items-center gap-3">
                     <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path
@@ -83,9 +113,12 @@ import {Link} from "@inertiajs/vue3";
                     </svg>
                     Довідники
                 </div>
-                <svg class="h-4 w-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                <svg class="h-4 w-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
             </a>
-            <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
+            <a href="#"
+               class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white">
                 <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                         stroke-linecap="round"
@@ -93,7 +126,8 @@ import {Link} from "@inertiajs/vue3";
                         stroke-width="2"
                         d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
                     />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
                 Налаштування
             </a>
@@ -102,11 +136,7 @@ import {Link} from "@inertiajs/vue3";
         <!-- Карточка филиала внизу -->
         <div class="m-4 rounded-xl border border-slate-700 bg-slate-800/50 p-4">
             <p class="text-sm font-semibold text-white">Філія №9</p>
-            <p class="mt-1 text-xs text-slate-400">м. Дніпро<br />вул. Набережна Перемоги 134, корп. 3, кв. 70</p>
+            <p class="mt-1 text-xs text-slate-400">м. Дніпро<br/>вул. Набережна Перемоги 134, корп. 3, кв. 70</p>
         </div>
     </aside>
 </template>
-
-<style scoped>
-
-</style>

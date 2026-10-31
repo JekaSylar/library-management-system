@@ -1,58 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Library Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, robust Library Management System built with Laravel 11, Vue 3, Inertia.js, and Tailwind CSS. This system focuses on a clean, professional UI/UX, modular components, and secure data handling.
 
-## About Laravel
+## Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+*   **Backend:** Laravel 11 (PHP 8.2+)
+*   **Frontend:** Vue 3 (Composition API) + Inertia.js
+*   **Styling:** Tailwind CSS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Make sure you have the following installed on your local environment:
+*   PHP >= 8.2
+*   Composer
+*   Node.js & npm
+*   MySQL
 
-## Learning Laravel
+## Installation & Setup
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Follow these steps to set up the project locally:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+**1. Clone the repository**
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <repository-url>
+cd library-management-system
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**2. Install PHP dependencies**
+```bash
+composer install
+```
 
-## Contributing
+**3. Install JavaScript dependencies**
+```bash
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**4. Set up environment variables**
+Copy the example environment file and configure your database credentials:
+```bash
+cp .env.example .env
+```
+*Open the `.env` file and update the `DB_*` variables with your database connection details.*
 
-## Code of Conduct
+**5. Generate application key**
+```bash
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**6. Run database migrations**
+Create the necessary tables in your database:
+```bash
+php artisan migrate
+```
 
-## Security Vulnerabilities
+**7. Build frontend assets**
+Compile the Tailwind CSS and Vue components for production:
+```bash
+npm run build
+```
+*(For local development with hot-reloading, you can use `npm run dev` instead).*
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Creating an Administrator Account
 
-## License
+This project includes a custom Artisan command to securely create an admin user directly from the terminal.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Run the following command:
+```bash
+php artisan app:create-admin
+```
+
+You will be prompted to enter the administrator's details:
+*   **Name:** The full name of the admin.
+*   **Email:** A unique email address.
+*   **Password:** Must be at least 8 characters.
+*   **Password Confirmation:** Type the password again.
+
+If validation passes, the account will be created with administrator privileges (`is_admin = true`).
+
+## Local Development Server
+
+To start the local development server, run:
+```bash
+php artisan serve
+```
+The application will be accessible at `http://localhost:8000`.

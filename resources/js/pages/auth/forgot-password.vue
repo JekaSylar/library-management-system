@@ -63,7 +63,7 @@ const form = useForm({
         <div>
             <PrimaryButton
                 class="w-full"
-                :disabled="form.processing"
+                :loading="form.processing"
             >
                 Скинути
             </PrimaryButton>

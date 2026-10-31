@@ -5,17 +5,13 @@ import Profile from "./main-layout/profile.vue";
 
 <template>
     <div class="flex h-screen w-full overflow-hidden">
-        <!-- Сайдбар (Левая панель) -->
-        <!-- На мобильных скрыт, открывается по кнопке (логика для JS), на десктопе фиксирован -->
 
         <Sidebar />
 
-        <!-- Основная область (Контент + Шапка) -->
+
         <div class="flex flex-1 flex-col overflow-hidden">
-            <!-- Верхняя шапка -->
+
             <header class="flex h-16 shrink-0 items-center justify-end border-b border-slate-200 bg-white px-4 md:px-6">
-
-
 
                <Profile />
             </header>

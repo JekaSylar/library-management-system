@@ -32,7 +32,7 @@ defineProps({
         <Title title="Мій профіль" />
     </div>
 
-    <Alert/>
+
 
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">

@@ -1,5 +1,4 @@
 <script setup>
-// 1. Забороняємо Vue вішати атрибути (і класи) на кореневий <div>
 defineOptions({
     inheritAttrs: false
 });

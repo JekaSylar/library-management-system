@@ -26,6 +26,6 @@ class ProfileController extends Controller
         $data += $request->filled('password') ? ['password' => $request->password] : [];
         $request->user()->update($data);
 
-        return back()->with('success', 'Дані профілю успішно оновлено!');
+        return back();
     }
 }
